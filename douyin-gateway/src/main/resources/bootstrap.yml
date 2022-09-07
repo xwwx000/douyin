@@ -1,0 +1,27 @@
+server:
+  port: 9090
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: device-gateway
+  profiles:
+    # 环境配置
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        #集群
+        server-addr: 127.0.0.1:8848
+      config:
+        #集群
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        port: 8719 #应用与Sentinel控制台交互的端口

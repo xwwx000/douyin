@@ -1,0 +1,37 @@
+# Tomcat
+server:
+  port: 8020
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: device-system
+  profiles:
+    # 环境配置
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+      config:
+        # 配置中心地址
+        server-addr: 127.0.0.1:8848
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        port: 8719 #应用与Sentinel控制台交互的端口
+  mail:
+    password: qkabctcdrbsxcbcg
+    username: 13452010@qq.com
+    host: smtp.qq.com
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true

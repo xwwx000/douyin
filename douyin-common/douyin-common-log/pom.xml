@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>douyin-common</artifactId>
+        <groupId>com.xwwx.douyin</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>douyin-common-log</artifactId>
+
+    <description>
+        douyin-common-log日志记录
+    </description>
+    <dependencies>
+
+        <!-- Spring Web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!-- Device Api System -->
+        <dependency>
+            <groupId>com.xwwx.douyin</groupId>
+            <artifactId>douyin-api-system</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- Device Common Redis-->
+        <dependency>
+            <groupId>com.xwwx.douyin</groupId>
+            <artifactId>douyin-common-redis</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    </dependencies>
+</project>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+<!--    <springProperty scope="context" name="log.dir" source="spring.logging.dir" defaultValue="logs"/>-->
+    <!--<property name="log.dir" value="D:/logs/wizdom/box" />-->
+    <property name="log.dir" value="logs/douyin/douyin-system" />
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!-- 彩色日志格式 -->
+    <property name="COLOR_PATTERN"
+              value="${COLOR_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50}:%L - %msg%n</pattern>-->
+            <pattern>${COLOR_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--myibatis log configure -->
+    <logger name="com.apache.ibatis" level="TRACE"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test,dev,prod">
+        <!-- 按照每天生成日志文件 -->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${log.dir}/app.%d{yyyy-MM-dd}.%i.log.zip
+                </FileNamePattern>
+                <MaxHistory>60</MaxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <!--文件达到 最大10MB时会被压缩和切割 -->
+                    <maxFileSize>10 MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50}:%L - %msg%n</pattern>
+            </encoder>
+<!--            <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--                <MaxFileSize>10MB</MaxFileSize>-->
+<!--            </triggeringPolicy>-->
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+</configuration>

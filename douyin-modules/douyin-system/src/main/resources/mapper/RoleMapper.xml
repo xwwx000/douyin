@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xwwx.douyin.system.mapper.RoleMapper">
+    <insert id="insertRoleModule" parameterType="java.util.List" >
+        insert into sys_role_module(id,role_id,module_id)
+        values
+        <foreach collection="roleModuleList" item="rolemodule" index="index" separator=",">
+            (
+            #{rolemodule.id,jdbcType=VARCHAR},
+            #{rolemodule.roleId,jdbcType=VARCHAR},
+            #{rolemodule.moduleId,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+</mapper>
