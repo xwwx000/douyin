@@ -7,10 +7,6 @@
  Source Host           : localhost:3306
  Source Schema         : douyin
 
- Target Server Type    : MySQL
- Target Server Version : 100406
- File Encoding         : 65001
-
  Date: 07/09/2022 10:26:24
 */
 
